@@ -67,7 +67,7 @@ class Lexer(object) :
     def tokenize(self, string) :
         while string :
             for rule in self.rules :
-                match_object = rule.pattern.match(stirng)
+                match_object = rule.pattern.match(string)
                 if match_object :
                     string = string[match_object.end():]
                     if rule.callback :
