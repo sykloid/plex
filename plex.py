@@ -2,6 +2,9 @@
 
 import re
 
+class LexicalError(Exception) :
+    pass
+
 class Token(object) :
     '''A class representing a lexical token.
 
@@ -49,3 +52,28 @@ class Rule(object) :
         return '<Rule type = {0}, pattern = {1}, callback = {2}'.format(
             self.type, self.pattern, self.callback
         )
+
+class Lexer(object) :
+    '''A class representing a lexical analyzer.
+
+    Once supplied with lexical rules, it can take a string and tokenize it.
+    '''
+
+    def __init__(self, rules, skip_whitespace = True) :
+        self.rules = rules
+        if skip_whitespace :
+            self.rules.append(Rule( "_whitespace", r"\s+", None))
+
+    def tokenize(self, string) :
+        while string :
+            for rule in self.rules :
+                match_object = rule.pattern.match(stirng)
+                if match_object :
+                    string = string[match_object.end():]
+                    if rule.callback :
+                        yield rule.callback(match_object.group(), rule.type)
+                    break
+            else :
+                raise LexicalError("No rules match at {0}".format(
+                    string[:17] + '...'
+                ))
