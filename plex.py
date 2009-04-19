@@ -43,9 +43,9 @@ class Rule(object) :
     discard its token.
     '''
 
-    def __init__(self, token_type, pattern, callback = Token) :
+    def __init__(self, token_type, pattern, callback = Token, flags = 0) :
         self.type = token_type
-        self.pattern = re.compile(pattern)
+        self.pattern = re.compile(pattern, flags)
         self.callback = callback
 
     def __repr__(self) :
