@@ -17,9 +17,9 @@ class Token(object) :
         self.type = token_type
 
     def __repr__(self) :
-        return '<Token: type = "{0}", lexeme = "{1}">'.format(
+        return '<Token: type = "{}", lexeme = "{}">'.format(
             self.type,
-            self.lexeme if len(self.lexeme) < 20 else self.lexeme[:17] + '...'
+            self.lexeme[:17] + '...'
         )
 
     def __str__(self) :
@@ -49,7 +49,7 @@ class Rule(object) :
         self.callback = callback
 
     def __repr__(self) :
-        return '<Rule type = {0}, pattern = {1}, callback = {2}'.format(
+        return '<Rule type = {}, pattern = {}, callback = {}'.format(
             self.type, self.pattern, self.callback
         )
 
@@ -74,6 +74,6 @@ class Lexer(object) :
                         yield rule.callback(match_object.group(), rule.type)
                     break
             else :
-                raise LexicalError("No rules match at {0}".format(
+                raise LexicalError("No rules match at {}".format(
                     string[:17] + '...'
                 ))
