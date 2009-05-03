@@ -26,7 +26,7 @@ class Token(object) :
         return self.lexeme
 
 class Rule(object) :
-    '''A class representing rule for lexical analysis.
+    '''A class representing a rule for lexical analysis.
 
     Each rule must have the following :
         * A regular expression pattern which represents the rule.
@@ -61,6 +61,8 @@ class Lexer(object) :
 
     def __init__(self, rules, skip_whitespace = True) :
         self.rules = rules
+        self.line_number = 1
+
         if skip_whitespace :
             self.rules.append(Rule( "_whitespace", r"\s+", None))
 
